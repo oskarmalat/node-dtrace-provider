@@ -9,3 +9,161 @@
   "repository" : { "type" : "git", "url" : "http://github.com/chrisa/node-dtrace-provider.git" },
   "scripts": { "install": "node-waf configure build" }
 }
+case $1 in
+start)  
+        /opt/local/bin/god -l /home/xxxxxx/current/log/god.log -P /home/xxxxxx/current/tmp/pids/god.pid || echo -en "\n already running"
+        for file in `ls -1 /home/xxxxxx/current/config//*.god`; do /opt/local/bin/god load ; done
+        echo "started"
+        ;;
+stop)   
+        kill -QUIT `cat /home/xxxxx/current/tmp/pids/god.pid` || echo -en "\n not running"
+        echo "stopped"
+        ;;
+restart|reload)
+        kill -HUP `cat /home/xxxxx/current/tmp/pids/god.pid` || echo -en "\n can't reload"
+        echo "restarted"
+        ;;
+*)
+        echo >&2 "Usage: /var/spool/ec2/rs_cache/attachments/script_159507 "
+        exit 1
+        ;;
+esac
+~    #!/usr/bin/env node
+// -*- mode: js -*-
+// Copyright 2011 Joyent, Inc.  All rights reserved.
+
+var path = require('path');
+var url = require('url');
+
+var common = require('../lib/cli_common');
+
+
+
+///--- Globals
+
+var Options = {
+  "account": String,
+  "debug": Boolean,
+  "help": Boolean,
+  "identity": path,
+  "keyId": String,
+  "url": url
+};
+
+var ShortOptions = {
+  "a": ["--account"],
+  "d": ["--debug"],
+  "h": ["--help"],
+  "?": ["--help"],
+  "i": ["--identity"],
+  "k": ["--keyId"],
+  "u": ["--url"]
+};
+
+var usageStr = common.buildUsageString(Options) + ' package';
+
+
+
+///--- Mainline
+
+common.parseArguments(Options, ShortOptions, function(parsed) {
+  if (parsed.argv.remain.length < 1)
+    common.usage(usageStr, 1, 'package required');
+
+  var client = common.newClient(parsed);
+  parsed.argv.remain.forEach(function(pkg) {
+    client.getPackage(pkg, common.callback);
+  });
+}, usageStr);#!/usr/bin/env node
+// -*- mode: js -*-
+// Copyright 2011 Joyent, Inc.  All rights reserved.
+
+var path = require('path');
+var url = require('url');
+
+var common = require('../lib/cli_common');
+
+
+
+///--- Globals
+
+var Options = {
+  "account": String,
+  "debug": Boolean,
+  "help": Boolean,
+  "identity": path,
+  "keyId": String,
+  "url": url
+};
+
+var ShortOptions = {
+  "a": ["--account"],
+  "d": ["--debug"],
+  "h": ["--help"],
+  "?": ["--help"],
+  "i": ["--identity"],
+  "k": ["--keyId"],
+  "u": ["--url"]
+};
+
+var usageStr = common.buildUsageString(Options) + ' package';
+
+
+
+///--- Mainline
+
+common.parseArguments(Options, ShortOptions, function(parsed) {
+  if (parsed.argv.remain.length < 1)
+    common.usage(usageStr, 1, 'package required');
+
+  var client = common.newClient(parsed);
+  parsed.argv.remain.forEach(function(pkg) {
+    client.getPackage(pkg, common.callback);
+  });
+}, usageStr);#!/usr/bin/env node
+// -*- mode: js -*-
+// Copyright 2011 Joyent, Inc.  All rights reserved.
+
+var path = require('path');
+var url = require('url');
+
+var common = require('../lib/cli_common');
+
+
+
+///--- Globals
+
+var Options = {
+  "account": String,
+  "debug": Boolean,
+  "help": Boolean,
+  "identity": path,
+  "keyId": String,
+  "url": url
+};
+
+var ShortOptions = {
+  "a": ["--account"],
+  "d": ["--debug"],
+  "h": ["--help"],
+  "?": ["--help"],
+  "i": ["--identity"],
+  "k": ["--keyId"],
+  "u": ["--url"]
+};
+
+var usageStr = common.buildUsageString(Options) + ' package';
+
+
+
+///--- Mainline
+
+common.parseArguments(Options, ShortOptions, function(parsed) {
+  if (parsed.argv.remain.length < 1)
+    common.usage(usageStr, 1, 'package required');
+
+  var client = common.newClient(parsed);
+  parsed.argv.remain.forEach(function(pkg) {
+    client.getPackage(pkg, common.callback);
+  });
+}, usageStr);
